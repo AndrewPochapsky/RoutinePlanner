@@ -35,7 +35,6 @@ public class MainPresenter implements MainInteractor.OnAnalysisCompleteListener{
             mView.hideProgress();
             mView.showFieldError();
         }
-
     }
 
     @Override
