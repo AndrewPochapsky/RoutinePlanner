@@ -5,7 +5,7 @@ import android.util.Log;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class MainInteractor {
 
@@ -17,10 +17,6 @@ public class MainInteractor {
 
     //https://stackoverflow.com/questions/27005861/calculate-days-between-two-dates-in-java-8
     public void analyze(String interval, String daysAgo, String year, String month, String day, OnAnalysisCompleteListener listener){
-        if(interval.isEmpty() || daysAgo.isEmpty()){
-            listener.onFieldError();
-            return;
-        }
 
         int intervalNum = Integer.parseInt(interval);
         int numDaysAgo = Integer.parseInt(daysAgo);
@@ -28,13 +24,28 @@ public class MainInteractor {
         int monthNum = monthToInteger(month);
         int dayNum = Integer.parseInt(day);
 
+        if(interval.isEmpty() || daysAgo.isEmpty()){
+            listener.onFieldError();
+            return;
+        }
         if(isOldDate(yearNum, monthNum, dayNum)){
             listener.onDateError();
             return;
         }
-        
-        //some analysis:
-        listener.onSuccess("Success!");
+
+        LocalDate lastCompletedDate = LocalDate.now().minusDays(numDaysAgo);
+        LocalDate projectedDate = LocalDate.of(yearNum, monthNum, dayNum);
+
+        long daysBetween = DAYS.between(lastCompletedDate, projectedDate);
+
+        String result = "";
+        if(daysBetween % intervalNum == 0){
+            result = "Yes";
+        }else{
+            result = "No";
+        }
+
+        listener.onSuccess(result);
     }
 
     public String[] generateDays(String month, int year){
