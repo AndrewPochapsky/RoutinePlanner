@@ -2,25 +2,37 @@ package com.company.loaf.routinescheduler;
 
 import android.util.Log;
 
+import java.time.LocalDate;
 import java.time.Year;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 
 public class MainInteractor {
 
     interface OnAnalysisCompleteListener{
-        void onError();
+        void onFieldError();
+        void onDateError();
         void onSuccess(String result);
     }
 
     //https://stackoverflow.com/questions/27005861/calculate-days-between-two-dates-in-java-8
-    public void analyze(String interval, String daysAgo, OnAnalysisCompleteListener listener){
+    public void analyze(String interval, String daysAgo, String year, String month, String day, OnAnalysisCompleteListener listener){
         if(interval.isEmpty() || daysAgo.isEmpty()){
-            listener.onError();
+            listener.onFieldError();
             return;
         }
+
         int intervalNum = Integer.parseInt(interval);
         int numDaysAgo = Integer.parseInt(daysAgo);
+        int yearNum = Integer.parseInt(year);
+        int monthNum = monthToInteger(month);
+        int dayNum = Integer.parseInt(day);
 
+        if(isOldDate(yearNum, monthNum, dayNum)){
+            listener.onDateError();
+            return;
+        }
+        
         //some analysis:
         listener.onSuccess("Success!");
     }
@@ -38,7 +50,6 @@ public class MainInteractor {
     public String[] generateYears(){
         int yearAmount = 10;
         int currentYear = Year.now().getValue();
-        Log.e("Generate", "current year: " + currentYear);
         String[] years = new String[yearAmount];
         for(int i = 0; i < yearAmount; i++){
             years[i] = String.valueOf(i + currentYear);
@@ -74,5 +85,11 @@ public class MainInteractor {
                 return 12;
         }
         return -1;
+    }
+
+    private boolean isOldDate(int year, int month, int day){
+        LocalDate date = LocalDate.of(year, month, day);
+        LocalDate today = LocalDate.now();
+        return date.isBefore(today);
     }
 }

@@ -2,8 +2,10 @@ package com.company.loaf.routinescheduler;
 
 public interface MainView {
     //if some EditText is left blank
-    void showError();
-    void hideError();
+    void showFieldError();
+    void hideFieldError();
+    void showDateError();
+    void hideDateError();
     //show/hide loading icon when analyzing
     void showProgress();
     void hideProgress();

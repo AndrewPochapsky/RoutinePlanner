@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements MainView, AdapterView.OnItemSelectedListener{
 
-    private TextView mErrorText, mResultText;
+    private TextView mEmptyFieldErrorText, mOldDateErrorText, mResultText;
     private ProgressBar mProgressBar;
     private EditText mInterval, mDaysAgo;
     private Spinner mYearSpinner, mMonthSpinner, mDaySpinner;
@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity implements MainView, Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mErrorText = findViewById(R.id.error_text);
+        mEmptyFieldErrorText = findViewById(R.id.empty_field_error);
+        mOldDateErrorText = findViewById(R.id.old_date_error);
         mResultText = findViewById(R.id.result_text);
         mInterval = findViewById(R.id.interval_input);
         mDaysAgo = findViewById(R.id.days_ago_input);
@@ -43,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements MainView, Adapter
 
         mYearSpinner.setOnItemSelectedListener(this);
         mMonthSpinner.setOnItemSelectedListener(this);
-
     }
 
     @Override
@@ -53,13 +53,23 @@ public class MainActivity extends AppCompatActivity implements MainView, Adapter
     }
 
     @Override
-    public void showError() {
-        mErrorText.setVisibility(View.VISIBLE);
+    public void showFieldError() {
+        mEmptyFieldErrorText.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideError() {
-        mErrorText.setVisibility(View.INVISIBLE);
+    public void hideFieldError() {
+        mEmptyFieldErrorText.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showDateError() {
+        mOldDateErrorText.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideDateError() {
+        mOldDateErrorText.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -79,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements MainView, Adapter
 
     @Override
     public void validateInfo() {
-        mPresenter.validateInfo(mInterval.getText().toString(), mDaysAgo.getText().toString());
+        mPresenter.validateInfo(mInterval.getText().toString(), mDaysAgo.getText().toString(), mYearSpinner.getSelectedItem().toString(), mMonthSpinner.getSelectedItem().toString(), mDaySpinner.getSelectedItem().toString());
     }
 
 

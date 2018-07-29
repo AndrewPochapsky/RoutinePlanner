@@ -10,11 +10,11 @@ public class MainPresenter implements MainInteractor.OnAnalysisCompleteListener{
         this.mInteractor = mInteractor;
     }
 
-    public void validateInfo(String interval, String numDaysAgo){
+    public void validateInfo(String interval, String numDaysAgo, String year, String month, String day){
         if(mView != null){
             mView.showProgress();
         }
-        mInteractor.analyze(interval, numDaysAgo, this);
+        mInteractor.analyze(interval, numDaysAgo, year, month, day, this);
     }
     
     public String[] generateDays(String month, String year){
@@ -30,19 +30,28 @@ public class MainPresenter implements MainInteractor.OnAnalysisCompleteListener{
     }
 
     @Override
-    public void onError() {
+    public void onFieldError() {
         if(mView != null){
             mView.hideProgress();
-            mView.showError();
+            mView.showFieldError();
         }
 
+    }
+
+    @Override
+    public void onDateError() {
+        if(mView != null){
+            mView.hideProgress();
+            mView.showDateError();
+        }
     }
 
     @Override
     public void onSuccess(String result) {
         if(mView != null){
             mView.hideProgress();
-            mView.hideError();
+            mView.hideFieldError();
+            mView.hideDateError();
             mView.displayInfo(result);
         }
     }
