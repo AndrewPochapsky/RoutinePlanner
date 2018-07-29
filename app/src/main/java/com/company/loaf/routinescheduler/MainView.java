@@ -10,4 +10,8 @@ public interface MainView {
     //display the result to user
     void displayInfo(String info);
     void validateInfo();
+
+    void generateYears();
+    void generateDays();
+    void generateMonths();
 }

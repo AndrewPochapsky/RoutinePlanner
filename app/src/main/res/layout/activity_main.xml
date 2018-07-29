@@ -24,6 +24,31 @@
         android:hint="Days ago"
         android:id="@+id/days_ago_input"/>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/year_spinner">
+        </Spinner>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/month_spinner">
+        </Spinner>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/day_spinner">
+
+        </Spinner>
+    </LinearLayout>
+
     <Button
         android:layout_width="150dp"
         android:layout_height="100dp"
