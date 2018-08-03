@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Button;
 
 import com.company.loaf.routinescheduler.R;
 import com.company.loaf.routinescheduler.Routine;
@@ -17,6 +18,8 @@ public class SelectActivity extends AppCompatActivity implements SelectView {
 
     RecyclerView mRecyclerView;
     SelectAdapter mAdapter;
+
+    Button mCreateButton;
 
     Routine[] mRoutines;
 
@@ -37,6 +40,8 @@ public class SelectActivity extends AppCompatActivity implements SelectView {
         mAdapter = new SelectAdapter(mRoutines);
         mRecyclerView.setAdapter(mAdapter);
 
+        findViewById(R.id.create_routine_button).setOnClickListener(v -> onCreateRoutine());
+
     }
 
     @Override
@@ -51,6 +56,6 @@ public class SelectActivity extends AppCompatActivity implements SelectView {
 
     @Override
     public void onCreateRoutine() {
-        
+
     }
 }

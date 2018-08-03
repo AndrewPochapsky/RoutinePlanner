@@ -8,6 +8,12 @@ public class Routine {
     //year|month|day
     private String savedDate;
 
+    public Routine(String name, int interval, String savedDate){
+        this.name = name;
+        this.interval = interval;
+        this.savedDate = savedDate;
+    }
+
 
     public String getName() {
         return name;

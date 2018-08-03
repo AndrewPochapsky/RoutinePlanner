@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_routine"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"/>
 
-    <TextView
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_select">
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/select_routine"
-        android:textSize="25sp"
-        android:textColor="@android:color/black"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Create"
+        android:textSize="30sp"
+        android:id="@+id/create_routine_button"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rv_select">
-    </android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+
+</RelativeLayout>
