@@ -4,6 +4,7 @@
     <string name="missing_field_error">Error: Fill in all text fields</string>
     <string name = "result_header">Result: </string>
     <string name="old_date_error">Error: day must not be before today</string>
+    <string name="select_routine">Select a routine</string>
     
     <string-array name="months_array">
         <item>January</item>
