@@ -12,7 +12,9 @@ public class SelectPresenter {
         mView = view;
         mInteractor = interactor;
     }
-
+    public void onDestroy(){
+        mView = null;
+    }
     Routine[] getSavedRoutines(Context c){
         return mInteractor.getSavedRoutines(c);
     }

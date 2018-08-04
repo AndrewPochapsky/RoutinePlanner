@@ -1,5 +1,6 @@
 package com.company.loaf.routinescheduler.select;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.widget.Button;
 
 import com.company.loaf.routinescheduler.R;
 import com.company.loaf.routinescheduler.Routine;
+import com.company.loaf.routinescheduler.create.CreateActivity;
 
 public class SelectActivity extends AppCompatActivity implements SelectView {
 
@@ -19,12 +21,10 @@ public class SelectActivity extends AppCompatActivity implements SelectView {
     RecyclerView mRecyclerView;
     SelectAdapter mAdapter;
 
-    Button mCreateButton;
-
     Routine[] mRoutines;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_routine);
         Log.d("Select", "this");
@@ -56,6 +56,13 @@ public class SelectActivity extends AppCompatActivity implements SelectView {
 
     @Override
     public void onCreateRoutine() {
+        Intent intent = new Intent(SelectActivity.this, CreateActivity.class);
+        startActivity(intent);
+    }
 
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDestroy();
+        super.onDestroy();
     }
 }

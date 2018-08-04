@@ -6,4 +6,14 @@ public interface CreateView {
     void showFieldError();
     void hideFieldError();
 
+    void showProgress();
+    void hideProgress();
+
+    void showSaveError();
+
+    void showSuccess(String name);
+
+    void onBack();
+
+    void createRoutine();
 }

@@ -10,6 +10,14 @@
     android:layout_marginEnd="5dp"
     android:layout_marginStart="5dp">
 
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="Name"
+        android:id="@+id/name_input"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,37 +31,20 @@
         android:inputType="number"
         android:hint="Days ago"
         android:id="@+id/days_ago_input"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:id="@+id/year_spinner">
-        </Spinner>
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:id="@+id/month_spinner">
-        </Spinner>
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:id="@+id/day_spinner">
-
-        </Spinner>
-    </LinearLayout>
-
+    
     <Button
         android:layout_width="150dp"
         android:layout_height="100dp"
+        android:text="Create"
         android:textSize="25sp"
-        android:id="@+id/submit_button"/>
+        android:id="@+id/create_button"/>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        android:text="Back"
+        android:textSize="25sp"
+        android:id="@+id/create_back_button"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,20 +64,12 @@
         android:id="@+id/old_date_error"
         android:visibility="invisible"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/result_header"
-            android:textSize="25sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/result_text"
-            android:textSize="25sp"/>
-    </LinearLayout>
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/create_progressbar"
+        android:visibility="invisible"/>
+
+
 
 </LinearLayout>

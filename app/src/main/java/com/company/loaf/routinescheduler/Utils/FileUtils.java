@@ -2,11 +2,12 @@ package com.company.loaf.routinescheduler.Utils;
 
 import android.content.Context;
 
-import com.company.loaf.routinescheduler.JSONConverter;
 import com.company.loaf.routinescheduler.Routine;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -26,7 +27,7 @@ public class FileUtils {
             }
             String json =  sb.toString();
 
-            Routine[] arr = JSONConverter.jsonToRoutines(json);
+            Routine[] arr = JSONUtils.jsonToRoutines(json);
 
             if(arr == null){
                 return new Routine[0];
@@ -37,5 +38,19 @@ public class FileUtils {
         } catch (IOException ioException) {
             return new Routine[0];
         }
+    }
+
+    public static boolean saveRoutines(Context context, String jsonString){
+        try {
+            FileOutputStream fos = context.openFileOutput(FILE_NAME,Context.MODE_PRIVATE);
+            if (jsonString != null) {
+                fos.write(jsonString.getBytes());
+            }
+            fos.close();
+            return true;
+        } catch (IOException ioException) {
+            return false;
+        }
+
     }
 }

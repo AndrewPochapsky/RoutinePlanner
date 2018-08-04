@@ -2,7 +2,6 @@ package com.company.loaf.routinescheduler.select;
 
 import android.content.Context;
 
-import com.company.loaf.routinescheduler.JSONConverter;
 import com.company.loaf.routinescheduler.Routine;
 import com.company.loaf.routinescheduler.Utils.FileUtils;
 
