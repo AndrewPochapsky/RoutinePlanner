@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_vertical|start">
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -29,12 +29,15 @@
                     android:id="@+id/routine_name"
                     android:textColor="@android:color/white"
                     android:text="@string/placeholder"/>
-                <Button
-                    android:id="@+id/expand_button"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:text="Expand"/>
-            </LinearLayout>
+                <!--TODO: Consider switching ImageView to ImageSwitcher for animations(in this case also just rotate the image instead of switching it)-->
+                <ImageView
+                    android:id="@+id/cardview_arrow"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_keyboard_arrow_up_black"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"/>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,17 +61,20 @@
                 android:id="@+id/expandable_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <Button
                     android:layout_width="100dp"
-                    android:layout_height="50dp" />
+                    android:layout_height="50dp"
+                    android:text="Interact"/>
                 <Button
                     android:layout_width="100dp"
-                    android:layout_height="50dp" />
+                    android:layout_height="50dp"
+                    android:text="Edit"/>
                 <Button
                     android:layout_width="100dp"
-                    android:layout_height="50dp" />
+                    android:layout_height="50dp"
+                    android:text="Delete"/>
 
 
             </LinearLayout>

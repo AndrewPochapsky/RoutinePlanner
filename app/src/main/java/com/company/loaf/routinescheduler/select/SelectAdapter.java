@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,11 +40,12 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.RoutineVie
         return mRoutines.length;
     }
 
-    class RoutineViewHolder extends RecyclerView.ViewHolder{
+    class RoutineViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView mName, mInterval;
         LinearLayout mExpandableButtons;
         CardView mCardView;
+        ImageView mArrowImage;
 
         public RoutineViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -51,20 +53,27 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.RoutineVie
             mInterval = itemView.findViewById(R.id.routine_interval);
             mExpandableButtons = itemView.findViewById(R.id.expandable_buttons);
             mCardView = itemView.findViewById(R.id.routine_cardview);
-            //TODO: try to add some animations if possible, current issue is that the retract animation looks awful
-            itemView.findViewById(R.id.expand_button).setOnClickListener(v ->{
-                int visibility = mExpandableButtons.getVisibility();
-                if(visibility == View.VISIBLE){
-                    mExpandableButtons.setVisibility(View.GONE);
-                }else{
-                    mExpandableButtons.setVisibility(View.VISIBLE);
-                }
-            });
+            mArrowImage = itemView.findViewById(R.id.cardview_arrow);
+            mExpandableButtons.setVisibility(View.GONE);
+            itemView.setOnClickListener(this);
         }
 
         void bind(String name, int interval){
             mName.setText(name);
             mInterval.setText(interval + " day(s)");
+        }
+
+        @Override
+        public void onClick(View view) {
+            //TODO: try to add some animations if possible, current issue is that the retract animation looks awful
+            int visibility = mExpandableButtons.getVisibility();
+            if(visibility == View.VISIBLE){
+                mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_up_black);
+                mExpandableButtons.setVisibility(View.GONE);
+            }else{
+                mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_down_black);
+                mExpandableButtons.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ import com.company.loaf.routinescheduler.R;
 import com.company.loaf.routinescheduler.Routine;
 import com.company.loaf.routinescheduler.create.CreateActivity;
 
-public class SelectActivity extends AppCompatActivity implements SelectView {
+public class SelectActivity extends AppCompatActivity implements SelectView{
 
     SelectPresenter mPresenter;
 
@@ -65,4 +65,5 @@ public class SelectActivity extends AppCompatActivity implements SelectView {
         mPresenter.onDestroy();
         super.onDestroy();
     }
+
 }
