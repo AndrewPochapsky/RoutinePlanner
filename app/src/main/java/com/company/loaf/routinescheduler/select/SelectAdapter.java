@@ -17,10 +17,18 @@ import com.company.loaf.routinescheduler.Routine;
 
 public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.RoutineViewHolder> {
 
-    Routine[] mRoutines;
+    final private ExpandableButtonClickedListener mListener;
 
-    public SelectAdapter(Routine[] routines){
+    public interface ExpandableButtonClickedListener{
+        void onDeleteButtonPressed(String name);
+    }
+
+    private Routine[] mRoutines;
+
+
+    public SelectAdapter(Routine[] routines, ExpandableButtonClickedListener listener){
         mRoutines = routines;
+        mListener = listener;
     }
 
     @NonNull
@@ -54,6 +62,9 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.RoutineVie
             mExpandableButtons = itemView.findViewById(R.id.expandable_buttons);
             mCardView = itemView.findViewById(R.id.routine_cardview);
             mArrowImage = itemView.findViewById(R.id.cardview_arrow);
+
+            itemView.findViewById(R.id.routine_delete_button).setOnClickListener(v -> mListener.onDeleteButtonPressed(mName.getText().toString()));
+
             mExpandableButtons.setVisibility(View.GONE);
             itemView.setOnClickListener(this);
         }
@@ -66,6 +77,7 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.RoutineVie
         @Override
         public void onClick(View view) {
             //TODO: try to add some animations if possible, current issue is that the retract animation looks awful
+            //TODO: consider only allowing for one cardview to be expanded at a time
             int visibility = mExpandableButtons.getVisibility();
             if(visibility == View.VISIBLE){
                 mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_up_black);

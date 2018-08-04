@@ -9,18 +9,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.company.loaf.routinescheduler.R;
 import com.company.loaf.routinescheduler.Routine;
 import com.company.loaf.routinescheduler.create.CreateActivity;
 
-public class SelectActivity extends AppCompatActivity implements SelectView{
+public class SelectActivity extends AppCompatActivity implements SelectView, SelectAdapter.ExpandableButtonClickedListener{
 
     SelectPresenter mPresenter;
 
     RecyclerView mRecyclerView;
-    SelectAdapter mAdapter;
-
     Routine[] mRoutines;
 
     @Override
@@ -35,23 +34,13 @@ public class SelectActivity extends AppCompatActivity implements SelectView{
 
         mPresenter = new SelectPresenter(this, new SelectInteractor());
 
-        mRoutines = getSavedRoutines();
-
-        mAdapter = new SelectAdapter(mRoutines);
-        mRecyclerView.setAdapter(mAdapter);
-
+        getSavedRoutines();
         findViewById(R.id.create_routine_button).setOnClickListener(v -> onCreateRoutine());
-
     }
 
     @Override
-    public Routine[] getSavedRoutines() {
-        return mPresenter.getSavedRoutines(this);
-    }
-
-    @Override
-    public void onShowRoutine() {
-
+    public void getSavedRoutines() {
+         mPresenter.getSavedRoutines(this);
     }
 
     @Override
@@ -61,9 +50,24 @@ public class SelectActivity extends AppCompatActivity implements SelectView{
     }
 
     @Override
+    public void populateRecyclerView(Routine[] routines) {
+        mRoutines = routines;
+        mRecyclerView.setAdapter(new SelectAdapter(routines, this));
+    }
+
+    @Override
+    public void onSuccessfulDeletion(String name) {
+        Toast.makeText(this, "Successfully deleted routine " + "'" + name + "'", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     protected void onDestroy() {
         mPresenter.onDestroy();
         super.onDestroy();
     }
 
+    @Override
+    public void onDeleteButtonPressed(String name) {
+        mPresenter.deleteRoutine(mRoutines, name, this);
+    }
 }

@@ -5,8 +5,8 @@ import android.content.Context;
 import com.company.loaf.routinescheduler.Routine;
 
 public class SelectPresenter {
-    SelectView mView;
-    SelectInteractor mInteractor;
+    private SelectView mView;
+    private SelectInteractor mInteractor;
 
     public SelectPresenter(SelectView view, SelectInteractor interactor){
         mView = view;
@@ -15,7 +15,19 @@ public class SelectPresenter {
     public void onDestroy(){
         mView = null;
     }
-    Routine[] getSavedRoutines(Context c){
-        return mInteractor.getSavedRoutines(c);
+
+    public void getSavedRoutines(Context c){
+         Routine[] routines = mInteractor.getSavedRoutines(c);
+        if(mView != null){
+            mView.populateRecyclerView(routines);
+        }
+    }
+
+    public void deleteRoutine(Routine[] routines, String routineToDelete, Context c){
+         Routine[] newRoutines = mInteractor.deleteRoutine(routines, routineToDelete, c);
+         if(mView != null){
+             mView.onSuccessfulDeletion(routineToDelete);
+             mView.populateRecyclerView(newRoutines);
+         }
     }
 }

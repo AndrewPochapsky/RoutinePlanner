@@ -55,8 +55,26 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:textColor="@android:color/white"
-                    android:text="@string/placeholder"/>
+                    android:text="5 day(s)"/>
+
             </LinearLayout>
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:textColor="@android:color/white"
+                    android:text="Next:"/>
+                <TextView
+                    android:id="@+id/routine_next_occurrence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:textColor="@android:color/white"
+                    android:text="0000/07/04"/>
+            </LinearLayout>-->
             <LinearLayout
                 android:id="@+id/expandable_buttons"
                 android:layout_width="match_parent"
@@ -64,25 +82,24 @@
                 android:visibility="visible">
 
                 <Button
+                    android:id="@+id/routine_interact_button"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:text="Interact"/>
                 <Button
+                    android:id="@+id/routine_edit_button"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:text="Edit"/>
                 <Button
+                    android:id="@+id/routine_delete_button"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:text="Delete"/>
 
-
             </LinearLayout>
 
-
         </LinearLayout>
-
-
 
     </android.support.v7.widget.CardView>
 

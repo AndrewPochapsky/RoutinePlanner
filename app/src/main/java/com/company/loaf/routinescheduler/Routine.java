@@ -6,6 +6,7 @@ public class Routine {
 
     private int interval;
     //year|month|day
+    //used to determine if a certain day is when the routine happens
     private String savedDate;
 
     public Routine(String name, int interval, String savedDate){
