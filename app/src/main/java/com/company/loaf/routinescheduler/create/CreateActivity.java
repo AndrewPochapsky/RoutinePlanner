@@ -61,12 +61,12 @@ public class CreateActivity extends AppCompatActivity implements CreateView {
 
     @Override
     public void showSaveError() {
-        Toast.makeText(this, R.string.create_routine_error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.create_routine_error, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showSuccess(String name) {
-        Toast.makeText(this, "Successfully created routine " + "'" + name + "'", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Successfully created routine " + "'" + name + "'", Toast.LENGTH_LONG).show();
         onBack();
     }
 
