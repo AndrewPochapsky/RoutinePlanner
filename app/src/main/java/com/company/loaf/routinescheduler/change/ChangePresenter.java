@@ -1,13 +1,13 @@
-package com.company.loaf.routinescheduler.create;
+package com.company.loaf.routinescheduler.change;
 
 import android.content.Context;
 
-public class CreatePresenter implements CreateInteractor.OnCompleteListener{
+public class ChangePresenter implements ChangeInteractor.OnCompleteListener{
 
-    private CreateView mView;
-    private CreateInteractor mInteractor;
+    private ChangeView mView;
+    private ChangeInteractor mInteractor;
 
-    public CreatePresenter(CreateView view, CreateInteractor interactor){
+    public ChangePresenter(ChangeView view, ChangeInteractor interactor){
         mView = view;
         mInteractor = interactor;
     }

@@ -1,4 +1,4 @@
-package com.company.loaf.routinescheduler.create;
+package com.company.loaf.routinescheduler.change;
 
 import android.content.Context;
 
@@ -10,7 +10,7 @@ import com.company.loaf.routinescheduler.Utils.JSONUtils;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-public class CreateInteractor {
+public class ChangeInteractor {
 
     public interface OnCompleteListener{
         void onFieldError();
@@ -51,7 +51,7 @@ public class CreateInteractor {
         }
     }
 
-    void editRoutine(String oldName, String name, String interval, String daysAgo, CreateInteractor.OnCompleteListener listener, Context context){
+    void editRoutine(String oldName, String name, String interval, String daysAgo, ChangeInteractor.OnCompleteListener listener, Context context){
 
         if(name.isEmpty() || interval.isEmpty() || daysAgo.isEmpty()){
             listener.onFieldError();

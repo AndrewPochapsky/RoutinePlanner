@@ -1,6 +1,6 @@
-package com.company.loaf.routinescheduler.create;
+package com.company.loaf.routinescheduler.change;
 
-public interface CreateView {
+public interface ChangeView {
 
     //if some EditText is left blank
     void showFieldError();

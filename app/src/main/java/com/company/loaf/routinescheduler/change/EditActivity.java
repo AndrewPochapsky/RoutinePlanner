@@ -1,4 +1,4 @@
-package com.company.loaf.routinescheduler.edit;
+package com.company.loaf.routinescheduler.change;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,15 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.company.loaf.routinescheduler.R;
-import com.company.loaf.routinescheduler.create.CreateActivity;
-import com.company.loaf.routinescheduler.create.CreateInteractor;
-import com.company.loaf.routinescheduler.create.CreatePresenter;
-import com.company.loaf.routinescheduler.create.CreateView;
 import com.company.loaf.routinescheduler.interact.InteractActivity;
 
-public class EditActivity extends AppCompatActivity implements CreateView {
+public class EditActivity extends AppCompatActivity implements ChangeView {
 
-    CreatePresenter mPresenter;
+    ChangePresenter mPresenter;
     TextView mFieldErrorText;
     EditText mNameInput, mIntervalInput, mDaysAgoInput;
     ProgressBar mProgressBar;
@@ -31,7 +27,7 @@ public class EditActivity extends AppCompatActivity implements CreateView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_routine);
 
-        mPresenter = new CreatePresenter(this, new CreateInteractor());
+        mPresenter = new ChangePresenter(this, new ChangeInteractor());
         mFieldErrorText = findViewById(R.id.empty_field_error);
         mNameInput = findViewById(R.id.name_input);
         mIntervalInput = findViewById(R.id.interval_input);
@@ -52,6 +48,12 @@ public class EditActivity extends AppCompatActivity implements CreateView {
         findViewById(R.id.create_back_button).setOnClickListener(v -> onBack());
     }
 
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDestroy();
+        super.onDestroy();
+    }
+    
     @Override
     public void showFieldError() {
         mFieldErrorText.setVisibility(View.VISIBLE);
@@ -85,8 +87,6 @@ public class EditActivity extends AppCompatActivity implements CreateView {
 
     @Override
     public void onBack() {
-        Intent intent = new Intent(EditActivity.this, InteractActivity.class);
-        startActivity(intent);
         finish();
     }
     @Override

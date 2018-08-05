@@ -1,4 +1,4 @@
-package com.company.loaf.routinescheduler.create;
+package com.company.loaf.routinescheduler.change;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import android.widget.Toast;
 import com.company.loaf.routinescheduler.R;
 import com.company.loaf.routinescheduler.interact.InteractActivity;
 
-public class CreateActivity extends AppCompatActivity implements CreateView {
+public class CreateActivity extends AppCompatActivity implements ChangeView {
 
-    CreatePresenter mPresenter;
+    ChangePresenter mPresenter;
 
     ProgressBar mProgressBar;
     TextView mFieldErrorText;
@@ -26,7 +26,7 @@ public class CreateActivity extends AppCompatActivity implements CreateView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_routine);
 
-        mPresenter = new CreatePresenter(this, new CreateInteractor());
+        mPresenter = new ChangePresenter(this, new ChangeInteractor());
 
         mNameText = findViewById(R.id.name_input);
         mIntervalText = findViewById(R.id.interval_input);
@@ -37,6 +37,12 @@ public class CreateActivity extends AppCompatActivity implements CreateView {
         findViewById(R.id.create_button).setOnClickListener(v -> changeRoutine());
         findViewById(R.id.create_back_button).setOnClickListener(v -> onBack());
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDestroy();
+        super.onDestroy();
     }
 
     @Override
@@ -72,8 +78,6 @@ public class CreateActivity extends AppCompatActivity implements CreateView {
 
     @Override
     public void onBack() {
-        Intent intent = new Intent(CreateActivity.this, InteractActivity.class);
-        startActivity(intent);
         finish();
     }
 

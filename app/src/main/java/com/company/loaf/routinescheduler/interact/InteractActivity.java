@@ -1,6 +1,5 @@
 package com.company.loaf.routinescheduler.interact;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -15,8 +14,8 @@ import android.widget.Toast;
 import com.company.loaf.routinescheduler.R;
 import com.company.loaf.routinescheduler.Routine;
 import com.company.loaf.routinescheduler.MyAdapter;
-import com.company.loaf.routinescheduler.create.CreateActivity;
-import com.company.loaf.routinescheduler.edit.EditActivity;
+import com.company.loaf.routinescheduler.change.CreateActivity;
+import com.company.loaf.routinescheduler.change.EditActivity;
 
 public class InteractActivity extends AppCompatActivity implements InteractView, MyAdapter.ExpandableButtonClickedListener, MyAdapter.SpinnerView{
 
@@ -37,8 +36,13 @@ public class InteractActivity extends AppCompatActivity implements InteractView,
 
         mPresenter = new InteractPresenter(this, new InteractInteractor());
 
-        getSavedRoutines();
         findViewById(R.id.create_routine_button).setOnClickListener(v -> onCreateRoutine());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getSavedRoutines();
     }
 
     @Override
