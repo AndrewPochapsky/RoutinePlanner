@@ -1,14 +1,14 @@
-package com.company.loaf.routinescheduler.select;
+package com.company.loaf.routinescheduler.interact;
 
 import android.content.Context;
 
 import com.company.loaf.routinescheduler.Routine;
 
-public class SelectPresenter {
-    private SelectView mView;
-    private SelectInteractor mInteractor;
+public class InteractPresenter {
+    private InteractView mView;
+    private InteractInteractor mInteractor;
 
-    public SelectPresenter(SelectView view, SelectInteractor interactor){
+    public InteractPresenter(InteractView view, InteractInteractor interactor){
         mView = view;
         mInteractor = interactor;
     }
@@ -29,5 +29,13 @@ public class SelectPresenter {
              mView.onSuccessfulDeletion(routineToDelete);
              mView.populateRecyclerView(newRoutines);
          }
+    }
+
+    public String[] generateDays(String month, String year){
+        return mInteractor.generateDays(month, Integer.parseInt(year));
+    }
+
+    public String[] generateYears(){
+        return mInteractor.generateYears();
     }
 }

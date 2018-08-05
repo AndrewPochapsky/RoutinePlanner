@@ -1,23 +1,22 @@
-package com.company.loaf.routinescheduler.select;
+package com.company.loaf.routinescheduler.interact;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.company.loaf.routinescheduler.R;
 import com.company.loaf.routinescheduler.Routine;
 import com.company.loaf.routinescheduler.create.CreateActivity;
 
-public class SelectActivity extends AppCompatActivity implements SelectView, SelectAdapter.ExpandableButtonClickedListener{
+public class InteractActivity extends AppCompatActivity implements InteractView, InteractAdapter.ExpandableButtonClickedListener, InteractAdapter.SpinnerView{
 
-    SelectPresenter mPresenter;
+    InteractPresenter mPresenter;
 
     RecyclerView mRecyclerView;
     Routine[] mRoutines;
@@ -32,7 +31,7 @@ public class SelectActivity extends AppCompatActivity implements SelectView, Sel
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mPresenter = new SelectPresenter(this, new SelectInteractor());
+        mPresenter = new InteractPresenter(this, new InteractInteractor());
 
         getSavedRoutines();
         findViewById(R.id.create_routine_button).setOnClickListener(v -> onCreateRoutine());
@@ -45,14 +44,14 @@ public class SelectActivity extends AppCompatActivity implements SelectView, Sel
 
     @Override
     public void onCreateRoutine() {
-        Intent intent = new Intent(SelectActivity.this, CreateActivity.class);
+        Intent intent = new Intent(InteractActivity.this, CreateActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void populateRecyclerView(Routine[] routines) {
         mRoutines = routines;
-        mRecyclerView.setAdapter(new SelectAdapter(routines, this));
+        mRecyclerView.setAdapter(new InteractAdapter(routines, this, this));
     }
 
     @Override
@@ -69,5 +68,26 @@ public class SelectActivity extends AppCompatActivity implements SelectView, Sel
     @Override
     public void onDeleteButtonPressed(String name) {
         mPresenter.deleteRoutine(mRoutines, name, this);
+    }
+
+    @Override
+    public void generateYears(Spinner spinner) {
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,  mPresenter.generateYears());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
+
+    @Override
+    public void generateMonths(Spinner spinner) {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.months_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
+
+    @Override
+    public void generateDays(Spinner spinner, String month, String year) {
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,  mPresenter.generateDays(month, year));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 }

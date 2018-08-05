@@ -1,8 +1,8 @@
-package com.company.loaf.routinescheduler.select;
+package com.company.loaf.routinescheduler.interact;
 
 import com.company.loaf.routinescheduler.Routine;
 
-public interface SelectView {
+public interface InteractView {
     void getSavedRoutines();
     void onCreateRoutine();
     void populateRecyclerView(Routine[] routines);

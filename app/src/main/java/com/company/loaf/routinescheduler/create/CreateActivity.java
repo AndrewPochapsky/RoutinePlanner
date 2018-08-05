@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.company.loaf.routinescheduler.R;
-import com.company.loaf.routinescheduler.select.SelectActivity;
+import com.company.loaf.routinescheduler.interact.InteractActivity;
 
 public class CreateActivity extends AppCompatActivity implements CreateView {
 
@@ -72,7 +72,7 @@ public class CreateActivity extends AppCompatActivity implements CreateView {
 
     @Override
     public void onBack() {
-        Intent intent = new Intent(CreateActivity.this, SelectActivity.class);
+        Intent intent = new Intent(CreateActivity.this, InteractActivity.class);
         startActivity(intent);
         finish();
     }

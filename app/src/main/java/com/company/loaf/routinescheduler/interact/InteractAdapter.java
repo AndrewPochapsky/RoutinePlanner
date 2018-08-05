@@ -1,34 +1,42 @@
-package com.company.loaf.routinescheduler.select;
+package com.company.loaf.routinescheduler.interact;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.company.loaf.routinescheduler.R;
 import com.company.loaf.routinescheduler.Routine;
 
-public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.RoutineViewHolder> {
+public class InteractAdapter extends RecyclerView.Adapter<InteractAdapter.RoutineViewHolder> {
 
     final private ExpandableButtonClickedListener mListener;
+    final private SpinnerView mSpinnerView;
 
     public interface ExpandableButtonClickedListener{
         void onDeleteButtonPressed(String name);
     }
 
+    public interface SpinnerView{
+        void generateYears(Spinner spinner);
+        void generateMonths(Spinner spinner);
+        void generateDays(Spinner spinner, String month, String year);
+    }
+
     private Routine[] mRoutines;
 
 
-    public SelectAdapter(Routine[] routines, ExpandableButtonClickedListener listener){
+    public InteractAdapter(Routine[] routines, ExpandableButtonClickedListener listener, SpinnerView view){
         mRoutines = routines;
         mListener = listener;
+        mSpinnerView = view;
     }
 
     @NonNull
@@ -48,12 +56,13 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.RoutineVie
         return mRoutines.length;
     }
 
-    class RoutineViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class RoutineViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, AdapterView.OnItemSelectedListener{
 
         TextView mName, mInterval;
         LinearLayout mExpandableButtons;
         CardView mCardView;
         ImageView mArrowImage;
+        Spinner mYearSpinner, mMonthSpinner, mDaySpinner;
 
         public RoutineViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,9 +70,19 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.RoutineVie
             mInterval = itemView.findViewById(R.id.routine_interval);
             mExpandableButtons = itemView.findViewById(R.id.expandable_buttons);
             mCardView = itemView.findViewById(R.id.routine_cardview);
+            mYearSpinner = itemView.findViewById(R.id.year_spinner);
+            mMonthSpinner = itemView.findViewById(R.id.month_spinner);
+            mDaySpinner = itemView.findViewById(R.id.day_spinner);
             mArrowImage = itemView.findViewById(R.id.cardview_arrow);
 
             itemView.findViewById(R.id.routine_delete_button).setOnClickListener(v -> mListener.onDeleteButtonPressed(mName.getText().toString()));
+
+            mSpinnerView.generateYears(mYearSpinner);
+            mSpinnerView.generateMonths(mMonthSpinner);
+            mSpinnerView.generateDays(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString());
+
+            mYearSpinner.setOnItemSelectedListener(this);
+            mMonthSpinner.setOnItemSelectedListener(this);
 
             mExpandableButtons.setVisibility(View.GONE);
             itemView.setOnClickListener(this);
@@ -80,12 +99,22 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.RoutineVie
             //TODO: consider only allowing for one cardview to be expanded at a time
             int visibility = mExpandableButtons.getVisibility();
             if(visibility == View.VISIBLE){
-                mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_up_black);
+                mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_down_black);
                 mExpandableButtons.setVisibility(View.GONE);
             }else{
-                mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_down_black);
+                mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_up_black);
                 mExpandableButtons.setVisibility(View.VISIBLE);
             }
+        }
+
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            mSpinnerView.generateDays(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString());
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
         }
     }
 }
