@@ -2,9 +2,13 @@ package com.company.loaf.routinescheduler;
 
 import android.util.Log;
 
+import com.company.loaf.routinescheduler.Utils.DateUtils;
+
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.YearMonth;
+
+import static com.company.loaf.routinescheduler.Utils.DateUtils.isOldDate;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class MainInteractor {
@@ -25,7 +29,7 @@ public class MainInteractor {
         int intervalNum = Integer.parseInt(interval);
         int numDaysAgo = Integer.parseInt(daysAgo);
         int yearNum = Integer.parseInt(year);
-        int monthNum = monthToInteger(month);
+        int monthNum = DateUtils.monthToInteger(month);
         int dayNum = Integer.parseInt(day);
 
         if(isOldDate(yearNum, monthNum, dayNum)){
@@ -49,7 +53,7 @@ public class MainInteractor {
     }
 
     public String[] generateDays(String month, int year){
-        YearMonth yearMonth = YearMonth.of(year, monthToInteger(month));
+        YearMonth yearMonth = YearMonth.of(year, DateUtils.monthToInteger(month));
         int daysInMonth = yearMonth.lengthOfMonth();
         String[] days = new String[daysInMonth];
         for(int i = 1; i <= daysInMonth; i++){
@@ -68,39 +72,4 @@ public class MainInteractor {
         return years;
     }
 
-    private int monthToInteger(String month){
-        switch (month){
-            case "January":
-                return 1;
-            case "February":
-                return 2;
-            case "March":
-                return 3;
-            case "April":
-                return 4;
-            case "May":
-                return 5;
-            case "June":
-                return 6;
-            case "July":
-                return 7;
-            case "August":
-                return 8;
-            case "September":
-                return 9;
-            case "October":
-                return 10;
-            case "November":
-                return 11;
-            case "December":
-                return 12;
-        }
-        return -1;
-    }
-
-    private boolean isOldDate(int year, int month, int day){
-        LocalDate date = LocalDate.of(year, month, day);
-        LocalDate today = LocalDate.now();
-        return date.isBefore(today);
-    }
 }

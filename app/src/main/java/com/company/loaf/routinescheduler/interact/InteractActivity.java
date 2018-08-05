@@ -12,9 +12,10 @@ import android.widget.Toast;
 
 import com.company.loaf.routinescheduler.R;
 import com.company.loaf.routinescheduler.Routine;
+import com.company.loaf.routinescheduler.MyAdapter;
 import com.company.loaf.routinescheduler.create.CreateActivity;
 
-public class InteractActivity extends AppCompatActivity implements InteractView, InteractAdapter.ExpandableButtonClickedListener, InteractAdapter.SpinnerView{
+public class InteractActivity extends AppCompatActivity implements InteractView, MyAdapter.ExpandableButtonClickedListener, MyAdapter.SpinnerView{
 
     InteractPresenter mPresenter;
 
@@ -51,7 +52,7 @@ public class InteractActivity extends AppCompatActivity implements InteractView,
     @Override
     public void populateRecyclerView(Routine[] routines) {
         mRoutines = routines;
-        mRecyclerView.setAdapter(new InteractAdapter(routines, this, this));
+        mRecyclerView.setAdapter(new MyAdapter(routines, this, this));
     }
 
     @Override

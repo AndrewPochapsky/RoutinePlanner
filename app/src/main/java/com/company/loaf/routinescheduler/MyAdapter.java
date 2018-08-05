@@ -1,4 +1,4 @@
-package com.company.loaf.routinescheduler.interact;
+package com.company.loaf.routinescheduler;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -12,10 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.company.loaf.routinescheduler.R;
-import com.company.loaf.routinescheduler.Routine;
+import com.company.loaf.routinescheduler.analyze.AnalyzeInteractor;
+import com.company.loaf.routinescheduler.analyze.AnalyzePresenter;
+import com.company.loaf.routinescheduler.analyze.AnalyzeView;
 
-public class InteractAdapter extends RecyclerView.Adapter<InteractAdapter.RoutineViewHolder> {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>{
 
     final private ExpandableButtonClickedListener mListener;
     final private SpinnerView mSpinnerView;
@@ -33,7 +34,7 @@ public class InteractAdapter extends RecyclerView.Adapter<InteractAdapter.Routin
     private Routine[] mRoutines;
 
 
-    public InteractAdapter(Routine[] routines, ExpandableButtonClickedListener listener, SpinnerView view){
+    public MyAdapter(Routine[] routines, ExpandableButtonClickedListener listener, SpinnerView view){
         mRoutines = routines;
         mListener = listener;
         mSpinnerView = view;
@@ -56,9 +57,11 @@ public class InteractAdapter extends RecyclerView.Adapter<InteractAdapter.Routin
         return mRoutines.length;
     }
 
-    class RoutineViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, AdapterView.OnItemSelectedListener{
+    class RoutineViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, AdapterView.OnItemSelectedListener, AnalyzeView {
 
-        TextView mName, mInterval;
+        AnalyzePresenter mPresenter;
+
+        TextView mName, mInterval, mResult;
         LinearLayout mExpandableButtons;
         CardView mCardView;
         ImageView mArrowImage;
@@ -66,8 +69,11 @@ public class InteractAdapter extends RecyclerView.Adapter<InteractAdapter.Routin
 
         public RoutineViewHolder(@NonNull View itemView) {
             super(itemView);
+            mPresenter = new AnalyzePresenter(this, new AnalyzeInteractor());
+
             mName = itemView.findViewById(R.id.routine_name);
             mInterval = itemView.findViewById(R.id.routine_interval);
+            mResult = itemView.findViewById(R.id.result_text);
             mExpandableButtons = itemView.findViewById(R.id.expandable_buttons);
             mCardView = itemView.findViewById(R.id.routine_cardview);
             mYearSpinner = itemView.findViewById(R.id.year_spinner);
@@ -83,6 +89,7 @@ public class InteractAdapter extends RecyclerView.Adapter<InteractAdapter.Routin
 
             mYearSpinner.setOnItemSelectedListener(this);
             mMonthSpinner.setOnItemSelectedListener(this);
+            mDaySpinner.setOnItemSelectedListener(this);
 
             mExpandableButtons.setVisibility(View.GONE);
             itemView.setOnClickListener(this);
@@ -109,12 +116,24 @@ public class InteractAdapter extends RecyclerView.Adapter<InteractAdapter.Routin
 
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            mSpinnerView.generateDays(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString());
+            if(!adapterView.equals(mDaySpinner))
+                mSpinnerView.generateDays(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString());
+            analyze();
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> adapterView) {
 
+        }
+
+        @Override
+        public void analyze() {
+            mPresenter.analyze(mRoutines, mName.getText().toString(), mYearSpinner.getSelectedItem().toString(), mMonthSpinner.getSelectedItem().toString(), mDaySpinner.getSelectedItem().toString());
+        }
+
+        @Override
+        public void displayResult(String result) {
+            mResult.setText(result);
         }
     }
 }
