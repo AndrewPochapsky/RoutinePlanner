@@ -1,4 +1,4 @@
-package com.company.loaf.routinescheduler.create;
+package com.company.loaf.routinescheduler.edit;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,32 +11,45 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.company.loaf.routinescheduler.R;
+import com.company.loaf.routinescheduler.create.CreateActivity;
+import com.company.loaf.routinescheduler.create.CreateInteractor;
+import com.company.loaf.routinescheduler.create.CreatePresenter;
+import com.company.loaf.routinescheduler.create.CreateView;
 import com.company.loaf.routinescheduler.interact.InteractActivity;
 
-public class CreateActivity extends AppCompatActivity implements CreateView {
+public class EditActivity extends AppCompatActivity implements CreateView {
 
     CreatePresenter mPresenter;
-
-    ProgressBar mProgressBar;
     TextView mFieldErrorText;
-    EditText mNameText, mIntervalText, mDaysAgoText;
+    EditText mNameInput, mIntervalInput, mDaysAgoInput;
+    ProgressBar mProgressBar;
+
+    String mOldName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_routine);
+        setContentView(R.layout.activity_edit_routine);
 
         mPresenter = new CreatePresenter(this, new CreateInteractor());
-
-        mNameText = findViewById(R.id.name_input);
-        mIntervalText = findViewById(R.id.interval_input);
-        mDaysAgoText = findViewById(R.id.days_ago_input);
         mFieldErrorText = findViewById(R.id.empty_field_error);
+        mNameInput = findViewById(R.id.name_input);
+        mIntervalInput = findViewById(R.id.interval_input);
+        mDaysAgoInput = findViewById(R.id.days_ago_input);
         mProgressBar = findViewById(R.id.create_progressbar);
 
-        findViewById(R.id.create_button).setOnClickListener(v -> changeRoutine());
-        findViewById(R.id.create_back_button).setOnClickListener(v -> onBack());
 
+        Intent previousActivityIntent = getIntent();
+        if(previousActivityIntent.hasExtra("name")){
+            mOldName = previousActivityIntent.getStringExtra("name");
+            mNameInput.setText(mOldName);
+        }
+        if(previousActivityIntent.hasExtra("interval")){
+            mIntervalInput.setText(previousActivityIntent.getStringExtra("interval"));
+        }
+
+        findViewById(R.id.confirm_edit_button).setOnClickListener(v -> changeRoutine() );
+        findViewById(R.id.create_back_button).setOnClickListener(v -> onBack());
     }
 
     @Override
@@ -66,19 +79,18 @@ public class CreateActivity extends AppCompatActivity implements CreateView {
 
     @Override
     public void showSuccess(String name) {
-        Toast.makeText(this, "Successfully created routine " + "'" + name + "'", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Successfully edited routine " + "'" + name + "'", Toast.LENGTH_LONG).show();
         onBack();
     }
 
     @Override
     public void onBack() {
-        Intent intent = new Intent(CreateActivity.this, InteractActivity.class);
+        Intent intent = new Intent(EditActivity.this, InteractActivity.class);
         startActivity(intent);
         finish();
     }
-
     @Override
     public void changeRoutine() {
-        mPresenter.createRoutine(mNameText.getText().toString(), mIntervalText.getText().toString(), mDaysAgoText.getText().toString(), this);
+        mPresenter.editRoutine(mOldName, mNameInput.getText().toString(), mIntervalInput.getText().toString(), mDaysAgoInput.getText().toString(), this);
     }
 }

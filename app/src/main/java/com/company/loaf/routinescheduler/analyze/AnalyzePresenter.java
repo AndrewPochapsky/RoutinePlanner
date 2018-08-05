@@ -11,10 +11,6 @@ public class AnalyzePresenter implements AnalyzeInteractor.OnAnalysisCompleteLis
         mInteractor = interactor;
     }
 
-    public void onDestroy(){
-        mView = null;
-    }
-
     public void analyze(Routine[] routines, String name, String year, String month, String day){
         mInteractor.analyze(routines, name, year, month, day, this);
     }

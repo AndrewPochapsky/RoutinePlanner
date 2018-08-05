@@ -1,12 +1,9 @@
 package com.company.loaf.routinescheduler.analyze;
 
-import com.company.loaf.routinescheduler.MainInteractor;
 import com.company.loaf.routinescheduler.Routine;
 import com.company.loaf.routinescheduler.Utils.DateUtils;
 
 import java.time.LocalDate;
-import java.time.Year;
-import java.time.YearMonth;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 

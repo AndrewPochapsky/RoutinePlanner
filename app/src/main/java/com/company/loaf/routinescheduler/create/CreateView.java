@@ -15,5 +15,5 @@ public interface CreateView {
 
     void onBack();
 
-    void createRoutine();
+    void changeRoutine();
 }

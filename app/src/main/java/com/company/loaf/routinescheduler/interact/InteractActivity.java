@@ -1,7 +1,9 @@
 package com.company.loaf.routinescheduler.interact;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,7 @@ import com.company.loaf.routinescheduler.R;
 import com.company.loaf.routinescheduler.Routine;
 import com.company.loaf.routinescheduler.MyAdapter;
 import com.company.loaf.routinescheduler.create.CreateActivity;
+import com.company.loaf.routinescheduler.edit.EditActivity;
 
 public class InteractActivity extends AppCompatActivity implements InteractView, MyAdapter.ExpandableButtonClickedListener, MyAdapter.SpinnerView{
 
@@ -68,7 +71,29 @@ public class InteractActivity extends AppCompatActivity implements InteractView,
 
     @Override
     public void onDeleteButtonPressed(String name) {
-        mPresenter.deleteRoutine(mRoutines, name, this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Delete " + "'" + name +"'?")
+                .setTitle("Are you sure?");
+
+        builder.setPositiveButton("Yes", (dialogInterface, i) -> {
+            mPresenter.deleteRoutine(mRoutines, name, this);
+            dialogInterface.cancel();
+        });
+
+        builder.setNegativeButton("No", ((dialogInterface, i) -> {
+            dialogInterface.cancel();
+        }));
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    @Override
+    public void onEditButtonPressed(String name, String interval) {
+        Intent intent = new Intent(InteractActivity.this, EditActivity.class);
+        intent.putExtra("name", name);
+        intent.putExtra("interval", interval);
+        startActivity(intent);
     }
 
     @Override

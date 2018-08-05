@@ -3,6 +3,7 @@ package com.company.loaf.routinescheduler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
 
     public interface ExpandableButtonClickedListener{
         void onDeleteButtonPressed(String name);
+        void onEditButtonPressed(String name, String interval);
     }
 
     public interface SpinnerView{
@@ -67,6 +69,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
         ImageView mArrowImage;
         Spinner mYearSpinner, mMonthSpinner, mDaySpinner;
 
+        String mIntervalString;
+
         public RoutineViewHolder(@NonNull View itemView) {
             super(itemView);
             mPresenter = new AnalyzePresenter(this, new AnalyzeInteractor());
@@ -83,6 +87,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
 
             itemView.findViewById(R.id.routine_delete_button).setOnClickListener(v -> mListener.onDeleteButtonPressed(mName.getText().toString()));
 
+            itemView.findViewById(R.id.routine_edit_button).setOnClickListener(v -> mListener.onEditButtonPressed(mName.getText().toString(), mIntervalString));
+
             mSpinnerView.generateYears(mYearSpinner);
             mSpinnerView.generateMonths(mMonthSpinner);
             mSpinnerView.generateDays(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString());
@@ -98,6 +104,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
         void bind(String name, int interval){
             mName.setText(name);
             mInterval.setText(interval + " day(s)");
+            mIntervalString = String.valueOf(interval);
         }
 
         @Override

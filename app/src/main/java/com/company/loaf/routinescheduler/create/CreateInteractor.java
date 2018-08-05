@@ -12,12 +12,11 @@ import java.util.Arrays;
 
 public class CreateInteractor {
 
-    interface OnCompleteListener{
+    public interface OnCompleteListener{
         void onFieldError();
         void onSaveError();
         void onSuccess(String name);
     }
-
 
     void createRoutine(String name, String interval, String daysAgo, OnCompleteListener listener, Context context){
 
@@ -47,6 +46,45 @@ public class CreateInteractor {
 
         if(successfulSave){
             listener.onSuccess(routine.getName());
+        }else{
+            listener.onSaveError();
+        }
+    }
+
+    void editRoutine(String oldName, String name, String interval, String daysAgo, CreateInteractor.OnCompleteListener listener, Context context){
+
+        if(name.isEmpty() || interval.isEmpty() || daysAgo.isEmpty()){
+            listener.onFieldError();
+            return;
+        }
+
+        int intervalNum = Integer.parseInt(interval);
+        int numDaysAgo = Integer.parseInt(daysAgo);
+        String dateStr = DateUtils.dateToString(LocalDate.now().minusDays(numDaysAgo));
+
+        Routine routineToEdit = null;
+
+        //Retrieve the existing routines from internal storage
+        Routine[] existingRoutines = FileUtils.getSavedRoutines(context);
+
+        for(Routine r : existingRoutines){
+            if(r.getName().equals(oldName)){
+                routineToEdit = r;
+                break;
+            }
+        }
+
+        routineToEdit.setInterval(intervalNum);
+        routineToEdit.setName(name);
+        routineToEdit.setSavedDate(dateStr);
+
+        //Write the new array into internal storage
+        String json = JSONUtils.routinesToJson(existingRoutines);
+
+        boolean successfulSave = FileUtils.saveRoutines(context, json);
+
+        if(successfulSave){
+            listener.onSuccess(routineToEdit.getName());
         }else{
             listener.onSaveError();
         }

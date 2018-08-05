@@ -12,12 +12,15 @@ public class CreatePresenter implements CreateInteractor.OnCompleteListener{
         mInteractor = interactor;
     }
 
-
     public void createRoutine(String name, String interval, String daysAgo, Context context){
         if(mView != null){
             mView.showProgress();
         }
         mInteractor.createRoutine(name, interval, daysAgo, this, context);
+    }
+
+    public void editRoutine(String oldName, String name, String interval, String daysAgo, Context context){
+        mInteractor.editRoutine(oldName, name, interval, daysAgo, this, context);
     }
 
     @Override
