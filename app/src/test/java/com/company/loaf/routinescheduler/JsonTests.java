@@ -1,6 +1,6 @@
 package com.company.loaf.routinescheduler;
 
-import com.company.loaf.routinescheduler.Utils.JSONUtils;
+import com.company.loaf.routinescheduler.utils.JSONUtils;
 
 import org.junit.Assert;
 import org.junit.Test;

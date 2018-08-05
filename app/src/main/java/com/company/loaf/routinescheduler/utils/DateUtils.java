@@ -1,4 +1,4 @@
-package com.company.loaf.routinescheduler.Utils;
+package com.company.loaf.routinescheduler.utils;
 
 import java.time.LocalDate;
 

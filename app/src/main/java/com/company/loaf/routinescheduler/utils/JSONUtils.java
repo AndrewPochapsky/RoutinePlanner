@@ -1,4 +1,4 @@
-package com.company.loaf.routinescheduler.Utils;
+package com.company.loaf.routinescheduler.utils;
 
 import com.company.loaf.routinescheduler.Routine;
 import com.google.gson.Gson;

@@ -1,7 +1,7 @@
 package com.company.loaf.routinescheduler.analyze;
 
 import com.company.loaf.routinescheduler.Routine;
-import com.company.loaf.routinescheduler.Utils.DateUtils;
+import com.company.loaf.routinescheduler.utils.DateUtils;
 
 import java.time.LocalDate;
 

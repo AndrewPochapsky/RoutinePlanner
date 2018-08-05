@@ -53,7 +53,7 @@ public class EditActivity extends AppCompatActivity implements ChangeView {
         mPresenter.onDestroy();
         super.onDestroy();
     }
-    
+
     @Override
     public void showFieldError() {
         mFieldErrorText.setVisibility(View.VISIBLE);

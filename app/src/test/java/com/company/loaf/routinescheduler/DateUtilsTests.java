@@ -1,12 +1,11 @@
 package com.company.loaf.routinescheduler;
 
-import com.company.loaf.routinescheduler.Utils.DateUtils;
+import com.company.loaf.routinescheduler.utils.DateUtils;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class DateUtilsTests {
 

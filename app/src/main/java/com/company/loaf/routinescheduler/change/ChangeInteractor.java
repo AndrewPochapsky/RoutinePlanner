@@ -3,9 +3,9 @@ package com.company.loaf.routinescheduler.change;
 import android.content.Context;
 
 import com.company.loaf.routinescheduler.Routine;
-import com.company.loaf.routinescheduler.Utils.DateUtils;
-import com.company.loaf.routinescheduler.Utils.FileUtils;
-import com.company.loaf.routinescheduler.Utils.JSONUtils;
+import com.company.loaf.routinescheduler.utils.DateUtils;
+import com.company.loaf.routinescheduler.utils.FileUtils;
+import com.company.loaf.routinescheduler.utils.JSONUtils;
 
 import java.time.LocalDate;
 import java.util.Arrays;

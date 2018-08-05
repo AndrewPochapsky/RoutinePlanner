@@ -1,4 +1,4 @@
-package com.company.loaf.routinescheduler.Utils;
+package com.company.loaf.routinescheduler.utils;
 
 import android.content.Context;
 
@@ -6,7 +6,6 @@ import com.company.loaf.routinescheduler.Routine;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
