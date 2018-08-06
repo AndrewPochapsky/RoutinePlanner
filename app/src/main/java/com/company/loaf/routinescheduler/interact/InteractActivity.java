@@ -102,21 +102,21 @@ public class InteractActivity extends AppCompatActivity implements InteractView,
 
     @Override
     public void generateYears(Spinner spinner) {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,  mPresenter.generateYears());
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.spinner_item,  mPresenter.generateYears());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
 
     @Override
     public void generateMonths(Spinner spinner) {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.months_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.months_array, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
 
     @Override
     public void generateDays(Spinner spinner, String month, String year) {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,  mPresenter.generateDays(month, year));
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.spinner_item,  mPresenter.generateDays(month, year));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }

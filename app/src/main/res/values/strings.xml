@@ -4,7 +4,7 @@
     <string name="create_routine_error">Error occurred when creating routine</string>
     <string name = "result_header">Result: </string>
     <string name="old_date_error">Error: day must not be before today</string>
-    <string name="select_routine">Select a routine</string>
+    <string name="select_routine">Routines</string>
     <string name="placeholder">Placeholder</string>
     
     <string-array name="months_array">

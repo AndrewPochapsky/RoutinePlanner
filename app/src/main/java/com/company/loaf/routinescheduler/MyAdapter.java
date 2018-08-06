@@ -113,10 +113,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
             //TODO: consider only allowing for one cardview to be expanded at a time
             int visibility = mExpandableButtons.getVisibility();
             if(visibility == View.VISIBLE){
-                mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_down_black);
+                mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_down);
                 mExpandableButtons.setVisibility(View.GONE);
             }else{
-                mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_up_black);
+                mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_up);
                 mExpandableButtons.setVisibility(View.VISIBLE);
             }
         }

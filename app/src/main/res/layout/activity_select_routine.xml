@@ -13,10 +13,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="monospace"
             android:text="@string/select_routine"
-            android:textSize="25sp"
+            android:textSize="45sp"
             android:textAlignment="center"
-            android:textColor="@android:color/black"/>
+            android:textStyle="bold"
+            android:textColor="@color/secondaryText"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -26,14 +28,28 @@
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/create_routine_button"
+        android:src="@drawable/ic_add_circle"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:text="Create"
-        android:textSize="30sp"
-        android:id="@+id/create_routine_button"/>
+        android:elevation="20dp"
+        android:scaleType="centerCrop" />
+    <!-- Background of the image view above this one, ghetto I know-->
+    <ImageView
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="23dp"
+        android:src="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:elevation="19dp"
+        android:scaleType="centerCrop" />
 
 
 

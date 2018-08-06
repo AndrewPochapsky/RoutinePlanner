@@ -8,15 +8,15 @@
         android:id="@+id/routine_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@android:color/darker_gray"
+        app:cardBackgroundColor="@color/cardDark"
         app:cardCornerRadius="7dp"
-        android:layout_margin="5dp"
-        app:contentPadding="5dp">
+        android:layout_margin="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:padding="5dp"
             android:gravity="center_vertical|start">
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                     android:id="@+id/cardview_arrow"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/ic_keyboard_arrow_down_black"
+                    android:src="@drawable/ic_keyboard_arrow_down"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"/>
             </RelativeLayout>
@@ -58,24 +58,6 @@
                     android:text="5 day(s)"/>
 
             </LinearLayout>
-            <!--<LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:textColor="@android:color/white"
-                    android:text="Next:"/>
-                <TextView
-                    android:id="@+id/routine_next_occurrence"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:textColor="@android:color/white"
-                    android:text="0000/07/04"/>
-            </LinearLayout>-->
-
             <LinearLayout
                 android:id="@+id/expandable_buttons"
                 android:layout_width="match_parent"
@@ -88,11 +70,14 @@
                     android:visibility="visible">
 
                     <Button
+                        android:theme="@style/AppTheme.ExpandableButton"
                         android:id="@+id/routine_edit_button"
                         android:layout_width="100dp"
                         android:layout_height="50dp"
-                        android:text="Edit"/>
+                        android:text="Edit"
+                        />
                     <Button
+                        android:theme="@style/AppTheme.ExpandableButton"
                         android:id="@+id/routine_delete_button"
                         android:layout_width="100dp"
                         android:layout_height="50dp"
@@ -101,50 +86,55 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:background="@color/cardPrimary"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <Spinner
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:id="@+id/year_spinner">
+                        </Spinner>
+
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/month_spinner">
+                        </Spinner>
+
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:id="@+id/day_spinner">
+                        </Spinner>
+
+                    </LinearLayout>
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAlignment="textStart"
-                        android:id="@+id/year_spinner">
-                    </Spinner>
-
-                    <Spinner
+                        android:text="Occurring on date?"
+                        android:textColor="@android:color/white"
+                        android:fontFamily="monospace"
+                        android:textSize="25sp"/>
+                    <TextView
+                        android:id="@+id/result_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/month_spinner">
-                    </Spinner>
-
-                    <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:id="@+id/day_spinner">
-                    </Spinner>
+                        android:text="@string/placeholder"
+                        android:textColor="@android:color/white"
+                        android:fontFamily="monospace"
+                        android:textSize="25sp"/>
 
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Occurring on date?"
-                    android:textColor="@android:color/white"
-                    android:fontFamily="monospace"
-                    android:textSize="25sp"/>
-                <TextView
-                    android:id="@+id/result_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/placeholder"
-                    android:textColor="@android:color/white"
-                    android:fontFamily="monospace"
-                    android:textSize="25sp"/>
-
             </LinearLayout>
-
-
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
