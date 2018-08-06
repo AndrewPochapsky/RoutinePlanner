@@ -2,6 +2,7 @@ package com.company.loaf.routinescheduler.interact;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,7 +28,7 @@ public class InteractActivity extends AppCompatActivity implements InteractView,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_routine);
+        setContentView(R.layout.activity_interact_routine);
         Log.d("Select", "this");
 
         mRecyclerView = findViewById(R.id.rv_select);
@@ -35,6 +36,9 @@ public class InteractActivity extends AppCompatActivity implements InteractView,
         mRecyclerView.setLayoutManager(layoutManager);
 
         mPresenter = new InteractPresenter(this, new InteractInteractor());
+
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.custom_actionbar);
 
         findViewById(R.id.create_routine_button).setOnClickListener(v -> onCreateRoutine());
     }
@@ -102,21 +106,21 @@ public class InteractActivity extends AppCompatActivity implements InteractView,
 
     @Override
     public void generateYears(Spinner spinner) {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.spinner_item,  mPresenter.generateYears());
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,  mPresenter.generateYears());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
 
     @Override
     public void generateMonths(Spinner spinner) {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.months_array, R.layout.spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.months_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
 
     @Override
     public void generateDays(Spinner spinner, String month, String year) {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.spinner_item,  mPresenter.generateDays(month, year));
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,  mPresenter.generateDays(month, year));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }

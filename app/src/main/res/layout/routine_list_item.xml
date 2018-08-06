@@ -8,9 +8,9 @@
         android:id="@+id/routine_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/cardDark"
-        app:cardCornerRadius="7dp"
-        android:layout_margin="5dp">
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="0dp"
+        android:layout_margin="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                     android:fontFamily="monospace"
                     android:textSize="42sp"
                     android:id="@+id/routine_name"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/secondaryText"
                     android:text="@string/placeholder"/>
                 <!--TODO: Consider switching ImageView to ImageSwitcher for animations(in this case also just rotate the image instead of switching it)-->
                 <ImageView
@@ -47,14 +47,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/secondaryText"
                     android:text="Interval:"/>
                 <TextView
                     android:id="@+id/routine_interval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/secondaryText"
                     android:text="5 day(s)"/>
 
             </LinearLayout>
@@ -86,7 +86,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:background="@color/cardPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -121,7 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Occurring on date?"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/secondaryText"
                         android:fontFamily="monospace"
                         android:textSize="25sp"/>
                     <TextView
@@ -129,13 +128,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/placeholder"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/secondaryText"
                         android:fontFamily="monospace"
                         android:textSize="25sp"/>
 
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dividerColor"/>
 
     </android.support.v7.widget.CardView>
 
