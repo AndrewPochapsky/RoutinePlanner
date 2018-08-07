@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.company.loaf.routinescheduler.R;
 import com.company.loaf.routinescheduler.interact.InteractActivity;
+import com.company.loaf.routinescheduler.utils.ActivityUtils;
 
 public class EditActivity extends AppCompatActivity implements ChangeView {
 
@@ -46,6 +47,8 @@ public class EditActivity extends AppCompatActivity implements ChangeView {
 
         findViewById(R.id.confirm_edit_button).setOnClickListener(v -> changeRoutine() );
         findViewById(R.id.create_back_button).setOnClickListener(v -> onBack());
+
+        ActivityUtils.setupActionBar(this, "Edit Routine");
     }
 
     @Override

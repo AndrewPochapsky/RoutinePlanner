@@ -32,6 +32,7 @@
         android:id="@+id/days_ago_input"/>
 
     <Button
+        android:theme="@style/AppTheme.ExpandableButton"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:text="Create"
@@ -39,6 +40,7 @@
         android:id="@+id/create_button"/>
 
     <Button
+        android:theme="@style/AppTheme.ExpandableButton"
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:text="Back"

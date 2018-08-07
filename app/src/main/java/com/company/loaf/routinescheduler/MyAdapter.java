@@ -4,7 +4,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.transition.AutoTransition;
+import android.transition.ChangeBounds;
+import android.transition.Fade;
 import android.transition.TransitionManager;
+import android.transition.TransitionSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,8 @@ import android.widget.Toast;
 import com.company.loaf.routinescheduler.analyze.AnalyzeInteractor;
 import com.company.loaf.routinescheduler.analyze.AnalyzePresenter;
 import com.company.loaf.routinescheduler.analyze.AnalyzeView;
+
+import static android.transition.TransitionSet.ORDERING_SEQUENTIAL;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>{
 
@@ -60,24 +65,27 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RoutineViewHolder routineViewHolder, int i) {
-        AutoTransition autoTransition = new AutoTransition();
-        autoTransition.setDuration(200);
 
         routineViewHolder.bind(mRoutines[i].getName(), mRoutines[i].getInterval());
 
         final boolean isExpanded = i==mExpandedPosition;
-        routineViewHolder.mExpandableButtons.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        routineViewHolder.mExpandableButtons.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         routineViewHolder.itemView.setActivated(isExpanded);
         routineViewHolder.itemView.setOnClickListener(v -> {
 
             if(isExpanded){
                 routineViewHolder.mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_down);
             }else{
+                routineViewHolder.mExpandableButtons.setVisibility(View.VISIBLE);
                 routineViewHolder.mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_up);
             }
 
             mExpandedPosition = isExpanded ? -1:i;
-            TransitionManager.beginDelayedTransition(mRecyclerView, autoTransition);
+
+
+            TransitionManager.beginDelayedTransition(mRecyclerView, new TransitionSet()
+                    .addTransition(new Fade(Fade.OUT))
+                    .addTransition(new ChangeBounds()));
             notifyDataSetChanged();
         });
     }

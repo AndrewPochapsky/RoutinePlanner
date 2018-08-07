@@ -1,6 +1,5 @@
 package com.company.loaf.routinescheduler.change;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.company.loaf.routinescheduler.R;
-import com.company.loaf.routinescheduler.interact.InteractActivity;
+import com.company.loaf.routinescheduler.utils.ActivityUtils;
 
 public class CreateActivity extends AppCompatActivity implements ChangeView {
 
@@ -36,6 +35,15 @@ public class CreateActivity extends AppCompatActivity implements ChangeView {
 
         findViewById(R.id.create_button).setOnClickListener(v -> changeRoutine());
         findViewById(R.id.create_back_button).setOnClickListener(v -> onBack());
+
+        ActivityUtils.setupActionBar(this, "Create Routine");
+
+        /*getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.custom_actionbar);
+
+        View v = getSupportActionBar().getCustomView();
+        TextView titleTxtView = v.findViewById(R.id.action_bar_title);
+        titleTxtView.setText("Create Routine");*/
 
     }
 

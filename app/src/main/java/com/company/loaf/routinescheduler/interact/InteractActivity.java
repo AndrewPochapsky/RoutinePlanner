@@ -17,6 +17,7 @@ import com.company.loaf.routinescheduler.Routine;
 import com.company.loaf.routinescheduler.MyAdapter;
 import com.company.loaf.routinescheduler.change.CreateActivity;
 import com.company.loaf.routinescheduler.change.EditActivity;
+import com.company.loaf.routinescheduler.utils.ActivityUtils;
 
 public class InteractActivity extends AppCompatActivity implements InteractView, MyAdapter.ExpandableButtonClickedListener, MyAdapter.SpinnerView{
 
@@ -37,8 +38,7 @@ public class InteractActivity extends AppCompatActivity implements InteractView,
 
         mPresenter = new InteractPresenter(this, new InteractInteractor());
 
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_actionbar);
+        ActivityUtils.setupActionBar(this, "Routines");
 
         findViewById(R.id.create_routine_button).setOnClickListener(v -> onCreateRoutine());
 
