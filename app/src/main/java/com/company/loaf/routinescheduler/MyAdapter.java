@@ -3,15 +3,21 @@ package com.company.loaf.routinescheduler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.company.loaf.routinescheduler.analyze.AnalyzeInteractor;
 import com.company.loaf.routinescheduler.analyze.AnalyzePresenter;
@@ -21,6 +27,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
 
     final private ExpandableButtonClickedListener mListener;
     final private SpinnerView mSpinnerView;
+    final private RecyclerView mRecyclerView;
 
     public interface ExpandableButtonClickedListener{
         void onDeleteButtonPressed(String name);
@@ -34,12 +41,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
     }
 
     private Routine[] mRoutines;
+    private int mExpandedPosition = -1;
 
 
-    public MyAdapter(Routine[] routines, ExpandableButtonClickedListener listener, SpinnerView view){
+    public MyAdapter(Routine[] routines, ExpandableButtonClickedListener listener, SpinnerView view, RecyclerView recyclerView){
         mRoutines = routines;
         mListener = listener;
         mSpinnerView = view;
+        mRecyclerView = recyclerView;
     }
 
     @NonNull
@@ -51,7 +60,26 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RoutineViewHolder routineViewHolder, int i) {
+        AutoTransition autoTransition = new AutoTransition();
+        autoTransition.setDuration(200);
+
         routineViewHolder.bind(mRoutines[i].getName(), mRoutines[i].getInterval());
+
+        final boolean isExpanded = i==mExpandedPosition;
+        routineViewHolder.mExpandableButtons.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        routineViewHolder.itemView.setActivated(isExpanded);
+        routineViewHolder.itemView.setOnClickListener(v -> {
+
+            if(isExpanded){
+                routineViewHolder.mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_down);
+            }else{
+                routineViewHolder.mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_up);
+            }
+
+            mExpandedPosition = isExpanded ? -1:i;
+            TransitionManager.beginDelayedTransition(mRecyclerView, autoTransition);
+            notifyDataSetChanged();
+        });
     }
 
     @Override
@@ -59,7 +87,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
         return mRoutines.length;
     }
 
-    class RoutineViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, AdapterView.OnItemSelectedListener, AnalyzeView {
+    class RoutineViewHolder extends RecyclerView.ViewHolder implements AdapterView.OnItemSelectedListener, AnalyzeView {
 
         AnalyzePresenter mPresenter;
 
@@ -96,29 +124,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
             mYearSpinner.setOnItemSelectedListener(this);
             mMonthSpinner.setOnItemSelectedListener(this);
             mDaySpinner.setOnItemSelectedListener(this);
-
-            mExpandableButtons.setVisibility(View.GONE);
-            itemView.setOnClickListener(this);
         }
 
         void bind(String name, int interval){
             mName.setText(name);
             mInterval.setText(interval + " day(s)");
             mIntervalString = String.valueOf(interval);
-        }
-
-        @Override
-        public void onClick(View view) {
-            //TODO: try to add some animations if possible, current issue is that the retract animation looks awful
-            //TODO: consider only allowing for one cardview to be expanded at a time
-            int visibility = mExpandableButtons.getVisibility();
-            if(visibility == View.VISIBLE){
-                mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_down);
-                mExpandableButtons.setVisibility(View.GONE);
-            }else{
-                mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_up);
-                mExpandableButtons.setVisibility(View.VISIBLE);
-            }
         }
 
         @Override

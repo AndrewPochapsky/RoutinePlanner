@@ -41,6 +41,7 @@ public class InteractActivity extends AppCompatActivity implements InteractView,
         getSupportActionBar().setCustomView(R.layout.custom_actionbar);
 
         findViewById(R.id.create_routine_button).setOnClickListener(v -> onCreateRoutine());
+
     }
 
     @Override
@@ -63,7 +64,7 @@ public class InteractActivity extends AppCompatActivity implements InteractView,
     @Override
     public void populateRecyclerView(Routine[] routines) {
         mRoutines = routines;
-        mRecyclerView.setAdapter(new MyAdapter(routines, this, this));
+        mRecyclerView.setAdapter(new MyAdapter(routines, this, this, mRecyclerView));
     }
 
     @Override
