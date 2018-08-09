@@ -6,6 +6,8 @@ public interface ChangeView {
     void showFieldError();
     void hideFieldError();
 
+    void showDuplicateNameError();
+
     void showProgress();
     void hideProgress();
 

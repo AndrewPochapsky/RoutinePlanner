@@ -68,6 +68,11 @@ public class EditActivity extends AppCompatActivity implements ChangeView {
     }
 
     @Override
+    public void showDuplicateNameError() {
+        Toast.makeText(this, "Error: name must be unique", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void showProgress() {
         mProgressBar.setVisibility(View.VISIBLE);
     }

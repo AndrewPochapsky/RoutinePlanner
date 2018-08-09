@@ -37,14 +37,6 @@ public class CreateActivity extends AppCompatActivity implements ChangeView {
         findViewById(R.id.create_back_button).setOnClickListener(v -> onBack());
 
         ActivityUtils.setupActionBar(this, "Create Routine");
-
-        /*getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_actionbar);
-
-        View v = getSupportActionBar().getCustomView();
-        TextView titleTxtView = v.findViewById(R.id.action_bar_title);
-        titleTxtView.setText("Create Routine");*/
-
     }
 
     @Override
@@ -61,6 +53,11 @@ public class CreateActivity extends AppCompatActivity implements ChangeView {
     @Override
     public void hideFieldError() {
         mFieldErrorText.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showDuplicateNameError() {
+        Toast.makeText(this, "Error: name must be unique", Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -15,10 +15,11 @@ public class ChangeInteractor {
     public interface OnCompleteListener{
         void onFieldError();
         void onSaveError();
+        void onNameError();
         void onSuccess(String name);
     }
 
-    void createRoutine(String name, String interval, String daysAgo, OnCompleteListener listener, Context context){
+    public void createRoutine(String name, String interval, String daysAgo, OnCompleteListener listener, Context context){
 
         if(name.isEmpty() || interval.isEmpty() || daysAgo.isEmpty()){
             listener.onFieldError();
@@ -34,6 +35,11 @@ public class ChangeInteractor {
 
         //Retrieve the existing routines from internal storage
         Routine[] existingRoutines = FileUtils.getSavedRoutines(context);
+
+        if(isDuplicateName(existingRoutines, name)){
+            listener.onNameError();
+            return;
+        }
 
         //Create a copy of that returned array and create a new one with one more space and put the new routine in that space
         Routine[] newRoutines = Arrays.copyOf(existingRoutines, existingRoutines.length + 1);
@@ -51,7 +57,7 @@ public class ChangeInteractor {
         }
     }
 
-    void editRoutine(String oldName, String name, String interval, String daysAgo, ChangeInteractor.OnCompleteListener listener, Context context){
+    public void editRoutine(String oldName, String name, String interval, String daysAgo, ChangeInteractor.OnCompleteListener listener, Context context){
 
         if(name.isEmpty() || interval.isEmpty() || daysAgo.isEmpty()){
             listener.onFieldError();
@@ -66,6 +72,11 @@ public class ChangeInteractor {
 
         //Retrieve the existing routines from internal storage
         Routine[] existingRoutines = FileUtils.getSavedRoutines(context);
+
+        if(!oldName.equals(name) && isDuplicateName(existingRoutines, name)){
+            listener.onNameError();
+            return;
+        }
 
         for(Routine r : existingRoutines){
             if(r.getName().equals(oldName)){
@@ -89,4 +100,14 @@ public class ChangeInteractor {
             listener.onSaveError();
         }
     }
+
+    private boolean isDuplicateName(Routine[] routines, String name){
+        for(Routine r: routines){
+            if(r.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

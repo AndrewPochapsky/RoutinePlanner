@@ -41,6 +41,14 @@ public class ChangePresenter implements ChangeInteractor.OnCompleteListener{
     }
 
     @Override
+    public void onNameError() {
+        if(mView != null){
+            mView.hideProgress();
+            mView.showDuplicateNameError();
+        }
+    }
+
+    @Override
     public void onSuccess(String name) {
         if(mView != null){
             mView.hideFieldError();

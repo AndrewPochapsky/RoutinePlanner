@@ -15,7 +15,6 @@ public class Routine {
         this.savedDate = savedDate;
     }
 
-
     public String getName() {
         return name;
     }
