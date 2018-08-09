@@ -62,7 +62,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.routine_list_item, viewGroup, false);
         return new RoutineViewHolder(view);
     }
-
+    //TODO: fix issue where arrow is not changing when the viewholder is collapsing as a result of another expanding
     @Override
     public void onBindViewHolder(@NonNull RoutineViewHolder routineViewHolder, int i) {
 
@@ -71,21 +71,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
         final boolean isExpanded = i==mExpandedPosition;
         routineViewHolder.mExpandableButtons.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         routineViewHolder.itemView.setActivated(isExpanded);
+
+        if(isExpanded){
+            routineViewHolder.mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_up);
+        }else{
+            routineViewHolder.mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_down);
+        }
+
         routineViewHolder.itemView.setOnClickListener(v -> {
 
-            if(isExpanded){
-                routineViewHolder.mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_down);
-            }else{
+            if(!isExpanded){
                 routineViewHolder.mExpandableButtons.setVisibility(View.VISIBLE);
-                routineViewHolder.mArrowImage.setImageResource(R.drawable.ic_keyboard_arrow_up);
             }
 
-            mExpandedPosition = isExpanded ? -1:i;
-
+            mExpandedPosition = isExpanded ? -1 : i;
 
             TransitionManager.beginDelayedTransition(mRecyclerView, new TransitionSet()
                     .addTransition(new Fade(Fade.OUT))
                     .addTransition(new ChangeBounds()));
+
             notifyDataSetChanged();
         });
     }
@@ -148,9 +152,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
         }
 
         @Override
-        public void onNothingSelected(AdapterView<?> adapterView) {
-
-        }
+        public void onNothingSelected(AdapterView<?> adapterView) { }
 
         @Override
         public void analyze() {
