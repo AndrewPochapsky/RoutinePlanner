@@ -1,5 +1,6 @@
 package com.company.loaf.routinescheduler;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -62,7 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.routine_list_item, viewGroup, false);
         return new RoutineViewHolder(view);
     }
-    //TODO: fix issue where arrow is not changing when the viewholder is collapsing as a result of another expanding
+
     @Override
     public void onBindViewHolder(@NonNull RoutineViewHolder routineViewHolder, int i) {
 
@@ -162,6 +163,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
         @Override
         public void displayResult(String result) {
             mResult.setText(result);
+            mResult.setTextColor(itemView.getResources().getColor(R.color.secondaryText, null));
+        }
+
+        @Override
+        public void displayErrorText(String text) {
+            mResult.setText(text);
+            mResult.setTextColor(Color.RED);
         }
     }
 }

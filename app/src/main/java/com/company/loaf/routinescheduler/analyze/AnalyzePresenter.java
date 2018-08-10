@@ -16,9 +16,10 @@ public class AnalyzePresenter implements AnalyzeInteractor.OnAnalysisCompleteLis
     }
 
     @Override
-    public void onCompletion(String result){
+    public void onCompletion(String result, boolean isError){
         if(mView != null){
-            mView.displayResult(result);
+            if(!isError) mView.displayResult(result);
+            else mView.displayErrorText(result);
         }
     }
 }

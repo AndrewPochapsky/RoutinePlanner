@@ -10,7 +10,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class AnalyzeInteractor {
 
     interface OnAnalysisCompleteListener{
-        void onCompletion(String result);
+        void onCompletion(String result, boolean isError);
     }
 
     private Routine getRoutineByName(Routine[] routines, String name){
@@ -31,7 +31,7 @@ public class AnalyzeInteractor {
         int dayNum = Integer.parseInt(day);
 
         if(DateUtils.isOldDate(yearNum, monthNum, dayNum)){
-            listener.onCompletion("Invalid date");
+            listener.onCompletion("Invalid date", true);
             return;
         }
 
@@ -47,6 +47,6 @@ public class AnalyzeInteractor {
             result = "No";
         }
 
-        listener.onCompletion(result);
+        listener.onCompletion(result, false);
     }
 }

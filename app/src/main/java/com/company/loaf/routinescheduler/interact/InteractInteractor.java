@@ -17,7 +17,6 @@ public class InteractInteractor {
         return FileUtils.getSavedRoutines(context);
     }
 
-    //TODO: Potential issue of duplicate routines
     public Routine[] deleteRoutine(Routine[] routines, String routineToDelete, Context context){
         Routine[] newRoutines = new Routine[routines.length - 1];
         int index = 0;

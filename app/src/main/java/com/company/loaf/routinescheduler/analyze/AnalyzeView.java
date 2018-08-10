@@ -4,4 +4,5 @@ package com.company.loaf.routinescheduler.analyze;
 public interface AnalyzeView {
     void analyze();
     void displayResult(String result);
+    void displayErrorText(String text);
 }
