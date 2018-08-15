@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.company.loaf.routinescheduler.R;
-import com.company.loaf.routinescheduler.interact.InteractActivity;
 import com.company.loaf.routinescheduler.utils.ActivityUtils;
 
 public class EditActivity extends AppCompatActivity implements ChangeView {
@@ -26,7 +25,7 @@ public class EditActivity extends AppCompatActivity implements ChangeView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_routine);
+        setContentView(R.layout.activity_change_routine);
 
         mPresenter = new ChangePresenter(this, new ChangeInteractor());
         mFieldErrorText = findViewById(R.id.empty_field_error);
@@ -45,7 +44,7 @@ public class EditActivity extends AppCompatActivity implements ChangeView {
             mIntervalInput.setText(previousActivityIntent.getStringExtra("interval"));
         }
 
-        findViewById(R.id.confirm_edit_button).setOnClickListener(v -> changeRoutine() );
+        findViewById(R.id.confirm_button).setOnClickListener(v -> changeRoutine() );
         findViewById(R.id.create_back_button).setOnClickListener(v -> onBack());
 
         ActivityUtils.setupActionBar(this, "Edit Routine");

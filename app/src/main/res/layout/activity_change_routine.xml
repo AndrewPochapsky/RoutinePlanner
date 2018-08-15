@@ -9,6 +9,12 @@
     android:layout_marginEnd="5dp"
     android:layout_marginStart="5dp">
 
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/create_progressbar"
+        android:visibility="invisible"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,9 +58,9 @@
         android:theme="@style/AppTheme.ExpandableButton"
         android:layout_width="150dp"
         android:layout_height="100dp"
-        android:text="Create"
+        android:text="Confirm"
         android:textSize="25sp"
-        android:id="@+id/create_button"/>
+        android:id="@+id/confirm_button"/>
 
     <Button
         android:theme="@style/AppTheme.ExpandableButton"
@@ -63,14 +69,5 @@
         android:text="Back"
         android:textSize="25sp"
         android:id="@+id/create_back_button"/>
-
-
-    <ProgressBar
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/create_progressbar"
-        android:visibility="invisible"/>
-
-
 
 </LinearLayout>

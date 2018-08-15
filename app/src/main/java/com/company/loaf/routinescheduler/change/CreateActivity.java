@@ -23,7 +23,7 @@ public class CreateActivity extends AppCompatActivity implements ChangeView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_routine);
+        setContentView(R.layout.activity_change_routine);
 
         mPresenter = new ChangePresenter(this, new ChangeInteractor());
 
@@ -33,7 +33,7 @@ public class CreateActivity extends AppCompatActivity implements ChangeView {
         mFieldErrorText = findViewById(R.id.empty_field_error);
         mProgressBar = findViewById(R.id.create_progressbar);
 
-        findViewById(R.id.create_button).setOnClickListener(v -> changeRoutine());
+        findViewById(R.id.confirm_button).setOnClickListener(v -> changeRoutine());
         findViewById(R.id.create_back_button).setOnClickListener(v -> onBack());
 
         ActivityUtils.setupActionBar(this, "Create Routine");

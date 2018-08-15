@@ -17,7 +17,7 @@ public class InteractPresenter {
     }
 
     public void getSavedRoutines(Context c){
-         Routine[] routines = mInteractor.getSavedRoutines(c);
+        Routine[] routines = mInteractor.getSavedRoutines(c);
         if(mView != null){
             mView.populateRecyclerView(routines);
         }
