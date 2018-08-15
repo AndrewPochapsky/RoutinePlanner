@@ -42,8 +42,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
 
     public interface SpinnerView{
         void generateYears(Spinner spinner);
-        void generateMonths(Spinner spinner);
-        void generateDays(Spinner spinner, String month, String year);
+        void generateMonths(Spinner spinner, int monthPos);
+        void generateDays(Spinner spinner, String month, String year, int dayPos);
     }
 
     private Routine[] mRoutines;
@@ -131,8 +131,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
             itemView.findViewById(R.id.routine_edit_button).setOnClickListener(v -> mListener.onEditButtonPressed(mName.getText().toString(), mIntervalString));
 
             mSpinnerView.generateYears(mYearSpinner);
-            mSpinnerView.generateMonths(mMonthSpinner);
-            mSpinnerView.generateDays(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString());
+            mSpinnerView.generateMonths(mMonthSpinner, mPresenter.getTodayMonth() - 1);
+            mSpinnerView.generateDays(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString(), mPresenter.getTodayDay() - 1);
 
             mYearSpinner.setOnItemSelectedListener(this);
             mMonthSpinner.setOnItemSelectedListener(this);
@@ -148,7 +148,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             if(!adapterView.equals(mDaySpinner))
-                mSpinnerView.generateDays(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString());
+                mSpinnerView.generateDays(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString(), mPresenter.getTodayDay() - 1);
             analyze();
         }
 

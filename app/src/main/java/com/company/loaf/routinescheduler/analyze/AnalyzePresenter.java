@@ -22,4 +22,12 @@ public class AnalyzePresenter implements AnalyzeInteractor.OnAnalysisCompleteLis
             else mView.displayErrorText(result);
         }
     }
+
+    public int getTodayMonth(){
+        return mInteractor.getTodayMonth();
+    }
+
+    public int getTodayDay(){
+        return mInteractor.getTodayDay();
+    }
 }

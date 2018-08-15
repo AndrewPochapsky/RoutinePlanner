@@ -9,6 +9,23 @@
     android:layout_marginEnd="5dp"
     android:layout_marginStart="5dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/missing_field_error"
+        android:textSize="20sp"
+        android:textColor="@android:color/holo_red_dark"
+        android:id="@+id/empty_field_error"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/old_date_error"
+        android:textSize="20sp"
+        android:textColor="@android:color/holo_red_dark"
+        android:id="@+id/old_date_error"
+        android:visibility="invisible"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -28,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="Days ago"
+        android:hint="Days since last occurrence"
         android:id="@+id/days_ago_input"/>
 
     <Button
@@ -47,23 +64,6 @@
         android:textSize="25sp"
         android:id="@+id/create_back_button"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/missing_field_error"
-        android:textSize="20sp"
-        android:textColor="@android:color/holo_red_dark"
-        android:id="@+id/empty_field_error"
-        android:visibility="invisible"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/old_date_error"
-        android:textSize="20sp"
-        android:textColor="@android:color/holo_red_dark"
-        android:id="@+id/old_date_error"
-        android:visibility="invisible"/>
 
     <ProgressBar
         android:layout_width="50dp"

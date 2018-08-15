@@ -49,4 +49,12 @@ public class AnalyzeInteractor {
 
         listener.onCompletion(result, false);
     }
+
+    public int getTodayMonth(){
+        return LocalDate.now().getMonthValue();
+    }
+
+    public int getTodayDay(){
+        return LocalDate.now().getDayOfMonth();
+    }
 }

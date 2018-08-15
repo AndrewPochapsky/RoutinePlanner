@@ -5,4 +5,5 @@ public interface AnalyzeView {
     void analyze();
     void displayResult(String result);
     void displayErrorText(String text);
+
 }
