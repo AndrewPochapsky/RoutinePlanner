@@ -1,4 +1,4 @@
-# RoutineScheduler
+# Routine Planner
 
 [Available on the Google Playstore!](https://play.google.com/store/apps/details?id=com.company.loaf.routinescheduler)
 
