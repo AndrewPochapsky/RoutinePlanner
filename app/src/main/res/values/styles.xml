@@ -5,7 +5,14 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/cardAccent</item>
+        <item name="cardViewStyle">@style/CardView</item>
+        <item name="floatingActionButtonStyle">@style/Widget.Design.FloatingActionButton</item>
+    </style>
+
+    <style name="AppTheme.ExpandableButton" parent = "Widget.AppCompat.Button.Colored">
+        <item name="android:colorButtonNormal">@color/cardAccent</item>
+        <item name="android:textColor">@color/titleText</item>
     </style>
 
 </resources>

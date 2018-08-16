@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/routine_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="0dp"
+        android:layout_margin="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:gravity="center_vertical|start">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:textSize="42sp"
+                    android:id="@+id/routine_name"
+                    android:textColor="@color/secondaryText"
+                    android:text="@string/placeholder"/>
+                <ImageView
+                    android:id="@+id/cardview_arrow"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:rotation="0"
+                    android:src="@drawable/ic_keyboard_arrow_down"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:textColor="@color/secondaryText"
+                    android:text="Interval:"/>
+                <TextView
+                    android:id="@+id/routine_interval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:textColor="@color/secondaryText"
+                    android:text="5 day(s)"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/expandable_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
+
+                    <Button
+                        android:theme="@style/AppTheme.ExpandableButton"
+                        android:id="@+id/routine_edit_button"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:text="Edit"
+                        />
+                    <Button
+                        android:theme="@style/AppTheme.ExpandableButton"
+                        android:id="@+id/routine_delete_button"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:text="Delete"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:id="@+id/year_spinner">
+                        </Spinner>
+
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/month_spinner">
+                        </Spinner>
+
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:id="@+id/day_spinner">
+                        </Spinner>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Occurring on date?"
+                        android:textColor="@color/secondaryText"
+                        android:fontFamily="monospace"
+                        android:textSize="25sp"/>
+                    <TextView
+                        android:id="@+id/result_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder"
+                        android:textColor="@color/secondaryText"
+                        android:fontFamily="monospace"
+                        android:textSize="28sp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/routine_cardview"
+        android:background="@color/dividerColor"/>
+
+
+</RelativeLayout>
