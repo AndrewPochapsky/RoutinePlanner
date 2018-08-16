@@ -12,7 +12,4 @@ public class JSONUtils {
     public static String routinesToJson(Routine[] routines){
         return new Gson().toJson(routines);
     }
-
-
-
 }
