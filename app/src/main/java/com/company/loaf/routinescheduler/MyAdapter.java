@@ -43,7 +43,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
     public interface SpinnerView{
         void generateYears(Spinner spinner);
         void generateMonths(Spinner spinner, int monthPos);
-        void generateDays(Spinner spinner, String month, String year, int dayPos);
+        void generateDaysAndSetValue(Spinner spinner, String month, String year, int dayPos);
+        void generateDays(Spinner spinner, String month, String year);
     }
 
     private Routine[] mRoutines;
@@ -130,9 +131,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
 
             itemView.findViewById(R.id.routine_edit_button).setOnClickListener(v -> mListener.onEditButtonPressed(mName.getText().toString(), mIntervalString));
 
+
+            //Set the default date as Today
             mSpinnerView.generateYears(mYearSpinner);
             mSpinnerView.generateMonths(mMonthSpinner, mPresenter.getTodayMonth() - 1);
-            mSpinnerView.generateDays(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString(), mPresenter.getTodayDay() - 1);
+            mSpinnerView.generateDaysAndSetValue(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString(), mPresenter.getTodayDay() - 1);
 
             mYearSpinner.setOnItemSelectedListener(this);
             mMonthSpinner.setOnItemSelectedListener(this);
@@ -147,8 +150,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
 
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            if(!adapterView.equals(mDaySpinner))
-                mSpinnerView.generateDays(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString(), mPresenter.getTodayDay() - 1);
+            if(!adapterView.equals(mDaySpinner)){
+                mSpinnerView.generateDays(mDaySpinner, mMonthSpinner.getSelectedItem().toString(), mYearSpinner.getSelectedItem().toString());
+            }
+
             analyze();
         }
 
@@ -157,7 +162,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoutineViewHolder>
 
         @Override
         public void analyze() {
-            mPresenter.analyze(mRoutines, mName.getText().toString(), mYearSpinner.getSelectedItem().toString(), mMonthSpinner.getSelectedItem().toString(), mDaySpinner.getSelectedItem().toString());
+            mPresenter.analyze(mRoutines, mName.getText().toString(), mYearSpinner.getSelectedItem().toString(),
+                    mMonthSpinner.getSelectedItem().toString(),
+                    mDaySpinner.getSelectedItem().toString());
         }
 
         @Override
